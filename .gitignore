@@ -1,0 +1,17 @@
+# Environment files
+.env
+.env.local
+
+# Node modules
+node_modules/
+
+# Firebase cache
+.firebase/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
