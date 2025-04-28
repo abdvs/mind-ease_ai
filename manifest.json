@@ -1,0 +1,15 @@
+{
+  "name": "MindEase",
+  "short_name": "MindEase",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f0f9f4",
+  "theme_color": "#42b883",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}

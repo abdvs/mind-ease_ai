@@ -1,0 +1,150 @@
+/* Base Styles */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f0f9f4;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  color: #2d3748;
+}
+
+/* 3D Interactive Background */
+.background-3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.water {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 60vh;
+  background: linear-gradient(
+    180deg,
+    rgba(64, 164, 223, 0.1) 0%,
+    rgba(104, 211, 239, 0.3) 100%
+  );
+  animation: wave 12s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+.mountain {
+  position: absolute;
+  bottom: 60vh;
+  width: 100%;
+  height: 40vh;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><path d="M0,100 L250,20 L500,50 L750,10 L1000,100 Z" fill="%2342b883" opacity="0.2"/></svg>')
+    repeat-x;
+  animation: mountainMove 30s linear infinite;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-25%) rotate(1deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+}
+
+@keyframes mountainMove {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1000px;
+  }
+}
+
+/* Floating Elements */
+.floating {
+  position: absolute;
+  opacity: 0.7;
+  animation: float 15s ease-in-out infinite;
+}
+
+.leaf1 {
+  top: 20%;
+  left: 10%;
+  width: 30px;
+  height: 30px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25,5 C35,15 45,25 25,45 C5,25 15,15 25,5 Z" fill="%2342b883"/></svg>')
+    no-repeat;
+  animation-delay: 0s;
+}
+.leaf2 {
+  top: 60%;
+  left: 80%;
+  width: 40px;
+  height: 40px;
+  animation-delay: 3s;
+  transform: rotate(45deg);
+}
+.leaf3 {
+  top: 30%;
+  left: 70%;
+  width: 25px;
+  height: 25px;
+  animation-delay: 6s;
+  transform: rotate(90deg);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(5deg);
+  }
+}
+
+/* Chat Interface */
+#chatbox {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+/* Breathing Guide Animation */
+.breathing-circle {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, #4fd1c5 0%, #81e6d9 100%);
+  border-radius: 50%;
+  margin: 20px auto;
+  animation: breathe 8s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Mood Selector */
+.mood-selector button {
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.mood-selector button:hover {
+  transform: translateY(-5px) rotateX(10deg);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
+}
