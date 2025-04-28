@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindEase AI Therapist</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <header class="app-header">
+        <h1>MindEase AI Therapist</h1>
+        <div class="mood-indicator">
+          <span id="current-mood">Calm</span>
+          <div class="mood-color" style="background-color: #06d6a0"></div>
+        </div>
+      </header>
+
+      <!-- Breathing Exercise Section -->
+      <section id="breathing-guide">
+        <h2>Follow the Circle</h2>
+        <div class="breathing-circle"></div>
+        <div class="breathing-instructions">
+          <p>Breathe in for 4 seconds</p>
+          <p>Hold for 7 seconds</p>
+          <p>Exhale for 8 seconds</p>
+        </div>
+        <button id="stop-breathing" class="secondary-btn">I'm Done</button>
+      </section>
+
+      <!-- Chat Interface -->
+      <div id="chat-container">
+        <div id="chatbox">
+          <!-- Messages will appear here dynamically -->
+          <div class="message bot-message">
+            <p>Hello! I'm here to listen. How are you feeling today?</p>
+          </div>
+        </div>
+
+        <div class="input-container">
+          <input
+            type="text"
+            id="userInput"
+            placeholder="How are you feeling today?"
+            autocomplete="off"
+          />
+          <button id="sendButton">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22 2L11 13"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M22 2L15 22L11 13L2 9L22 2Z"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mood Selector -->
+      <section class="mood-selector">
+        <h2>Log Your Mood</h2>
+        <div class="mood-buttons">
+          <button data-mood="happy" class="mood-btn">😊 Happy</button>
+          <button data-mood="calm" class="mood-btn">🧘 Calm</button>
+          <button data-mood="anxious" class="mood-btn">😰 Anxious</button>
+          <button data-mood="sad" class="mood-btn">😢 Sad</button>
+          <button data-mood="angry" class="mood-btn">😠 Angry</button>
+        </div>
+      </section>
+
+      <!-- Emergency Footer -->
+      <footer class="disclaimer">
+        <p>
+          MindEase is not a substitute for professional help. If you're in
+          crisis, please contact
+          <a href="mailto:duvvuriabhiram@gmail.com">duvvuriabhiram@gmail.com</a>
+          or call 1-800-273-8255.
+        </p>
+      </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // Mood Selection
+      document.querySelectorAll(".mood-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const mood = this.getAttribute("data-mood");
+          document.getElementById("current-mood").textContent =
+            mood.charAt(0).toUpperCase() + mood.slice(1);
+          document.querySelector(".mood-color").style.backgroundColor =
+            window.getComputedStyle(this).backgroundColor;
+
+          // Send mood to chat
+          const chatbox = document.getElementById("chatbox");
+          chatbox.innerHTML += `
+          <div class="message user-message">
+            <p>I'm feeling ${mood}.</p>
+          </div>
+        `;
+          chatbox.scrollTop = chatbox.scrollHeight;
+        });
+      });
+
+      // Chat Functionality
+      document
+        .getElementById("sendButton")
+        .addEventListener("click", sendMessage);
+      document
+        .getElementById("userInput")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") sendMessage();
+        });
+
+      function sendMessage() {
+        const userInput = document.getElementById("userInput");
+        if (!userInput.value.trim()) return;
+
+        const chatbox = document.getElementById("chatbox");
+        chatbox.innerHTML += `
+        <div class="message user-message">
+          <p>${userInput.value}</p>
+        </div>
+      `;
+
+        // Simulate AI response (replace with actual API call)
+        setTimeout(() => {
+          chatbox.innerHTML += `
+          <div class="message bot-message">
+            <p>I understand you're feeling that way. Would you like to talk more about it or try a coping exercise?</p>
+          </div>
+        `;
+          chatbox.scrollTop = chatbox.scrollHeight;
+        }, 1000);
+
+        userInput.value = "";
+      }
+
+      // Breathing Animation
+      const breathingCircle = document.querySelector(".breathing-circle");
+      let breatheInterval;
+
+      document
+        .getElementById("stop-breathing")
+        .addEventListener("click", function () {
+          clearInterval(breatheInterval);
+          breathingCircle.style.animation = "none";
+        });
+    </script>
+  </body>
+</html>
